@@ -13,6 +13,7 @@ from datetime import date
 from dotenv import load_dotenv
 import os
 
+load_dotenv()
 SECRET_KEY = os.getenv("SECRET_KEY")
 
 app = Flask(__name__)
@@ -21,7 +22,7 @@ ckeditor = CKEditor(app)
 Bootstrap(app)
 
 ##CONNECT TO DB
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///blog.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get("DATABASE_URL",  "sqlite:///blog.db")
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 login_manager = LoginManager()
